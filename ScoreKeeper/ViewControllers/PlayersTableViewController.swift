@@ -10,7 +10,7 @@ import UIKit
 
 class PlayersTableViewController: UITableViewController {
 
-    var game: Game? //using bangs because if this is ever nil, the app should crash
+    var game: Game? 
     var addingNewPlayer: Bool = false
     
     override func viewDidLoad() {
@@ -23,6 +23,7 @@ class PlayersTableViewController: UITableViewController {
     //========================================
     
     @IBAction func backButtonTapped(_ sender: Any) {
+        Game.saveGames()
         performSegue(withIdentifier: "unwindToGamesTableViewController", sender: nil)
     }
     
@@ -69,9 +70,9 @@ class PlayersTableViewController: UITableViewController {
     
     @objc func scoreStepperChanged(_ sender: UIStepper) {
         let cell = tableView.cellForRow(at: IndexPath(item: sender.tag, section: 0)) as! PlayerTableViewCell
-        
+
         game!.players[sender.tag - 1].score = Int(sender.value)
-        cell.scoreLabel.text = String(game!.players[sender.tag - 1].score)
+        cell.scoreTextField.text = String(game!.players[sender.tag - 1].score)
     }
     
     //========================================
@@ -82,12 +83,13 @@ class PlayersTableViewController: UITableViewController {
         return game!.players.count + 1
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "newPlayerCell", for: indexPath) as! AddPlayerTableViewCell
+            
+            cell.selectionStyle = .none
             
             cell.addButton.addTarget(self, action: #selector(cellAddButtonTapped), for: .touchUpInside)
             cell.cancelButton.addTarget(self, action: #selector(cellCancelButtonTapped), for: .touchUpInside)
@@ -98,11 +100,14 @@ class PlayersTableViewController: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath) as! PlayerTableViewCell
             
+            cell.delegate = self
+            cell.selectionStyle = .none
+            
             cell.scoreStepper.tag = indexPath.row
             cell.scoreStepper.addTarget(self, action: #selector(scoreStepperChanged(_:)), for: .valueChanged)
             
             cell.nameLabel.text = game!.players[indexPath.row - 1].name
-            cell.scoreLabel.text = String(game!.players[indexPath.row - 1].score)
+            cell.scoreTextField.text = String(game!.players[indexPath.row - 1].score)
             cell.scoreStepper.value = Double(game!.players[indexPath.row - 1].score)
             
             return cell
@@ -117,9 +122,6 @@ class PlayersTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

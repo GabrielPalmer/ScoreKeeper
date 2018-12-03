@@ -15,11 +15,12 @@ class NewGameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameTextField.delegate = self
+        nameTextField.becomeFirstResponder()
     }
     
     @IBAction func createButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "openNewGame", sender: nil)
+        performSegue(withIdentifier: "openNewGameSegue", sender: nil)
     }
     
     //========================================

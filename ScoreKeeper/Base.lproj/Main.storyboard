@@ -18,6 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newPlayerCell" id="DIM-Uk-gz9" customClass="AddPlayerTableViewCell" customModule="ScoreKeeper" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -29,7 +30,7 @@
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-l4-V7C">
                                             <rect key="frame" x="16" y="7" width="226" height="30"/>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPf-A6-rOU">
@@ -79,31 +80,32 @@
                                         <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="999" translatesAutoresizingMaskIntoConstraints="NO" id="k22-xA-9cc">
                                             <rect key="frame" x="199" y="7.5" width="94" height="29"/>
                                         </stepper>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBY-Bz-sqM">
-                                            <rect key="frame" x="309" y="11.5" width="50" height="21"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PHw-XH-6WK">
+                                            <rect key="frame" x="309" y="7" width="50" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="s8F-qt-iZ4"/>
+                                                <constraint firstAttribute="height" constant="30" id="0yF-50-yJi"/>
+                                                <constraint firstAttribute="width" constant="50" id="gtU-3v-40Y"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="PHw-XH-6WK" firstAttribute="leading" secondItem="k22-xA-9cc" secondAttribute="trailing" constant="16" id="3W5-TB-v3M"/>
+                                        <constraint firstAttribute="trailing" secondItem="PHw-XH-6WK" secondAttribute="trailing" constant="16" id="5Kz-hF-2rL"/>
+                                        <constraint firstItem="PHw-XH-6WK" firstAttribute="centerY" secondItem="0Vm-Fj-aVF" secondAttribute="centerY" id="F20-yh-7LZ"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="eIW-CJ-Kz6" secondAttribute="bottom" id="LPs-Q4-rWz"/>
                                         <constraint firstItem="eIW-CJ-Kz6" firstAttribute="leading" secondItem="0Vm-Fj-aVF" secondAttribute="leadingMargin" id="PTz-IQ-agt"/>
                                         <constraint firstItem="k22-xA-9cc" firstAttribute="centerY" secondItem="0Vm-Fj-aVF" secondAttribute="centerY" id="Q64-C3-Wxx"/>
-                                        <constraint firstItem="yBY-Bz-sqM" firstAttribute="centerY" secondItem="0Vm-Fj-aVF" secondAttribute="centerY" id="aYU-79-Nku"/>
-                                        <constraint firstItem="yBY-Bz-sqM" firstAttribute="leading" secondItem="k22-xA-9cc" secondAttribute="trailing" constant="16" id="csd-Ze-jTY"/>
                                         <constraint firstItem="k22-xA-9cc" firstAttribute="leading" secondItem="eIW-CJ-Kz6" secondAttribute="trailing" constant="16" id="cxG-MN-Vzo"/>
-                                        <constraint firstItem="yBY-Bz-sqM" firstAttribute="trailing" secondItem="0Vm-Fj-aVF" secondAttribute="trailingMargin" id="yxt-Qu-rsb"/>
                                         <constraint firstItem="eIW-CJ-Kz6" firstAttribute="top" secondItem="0Vm-Fj-aVF" secondAttribute="topMargin" id="z8k-MN-U1y"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="eIW-CJ-Kz6" id="YN4-FK-zgV"/>
-                                    <outlet property="scoreLabel" destination="yBY-Bz-sqM" id="lgQ-EF-2yt"/>
                                     <outlet property="scoreStepper" destination="k22-xA-9cc" id="Nvk-3R-MHR"/>
+                                    <outlet property="scoreTextField" destination="PHw-XH-6WK" id="fRw-Cy-7k9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -130,8 +132,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0NB-Hh-nKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SXq-qh-R98" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="xgp-j7-WmO"/>
             </objects>
-            <point key="canvasLocation" x="3647" y="-297"/>
+            <point key="canvasLocation" x="3645.5999999999999" y="-297.30134932533736"/>
         </scene>
         <!--Games-->
         <scene sceneID="hoZ-pn-buF">
@@ -166,7 +169,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="J8F-VI-ZjP" kind="show" identifier="editGameSegue" id="DnP-rB-WKO"/>
+                                    <segue destination="6yc-1x-DJH" kind="show" identifier="editGameSegue" id="Fue-4M-1Yu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -235,7 +238,7 @@
                     <navigationItem key="navigationItem" title="New Game" id="4wc-KZ-2WQ"/>
                     <connections>
                         <outlet property="nameTextField" destination="5iO-Fj-RYt" id="rrw-jE-xpB"/>
-                        <segue destination="J8F-VI-ZjP" kind="presentation" identifier="openNewGame" id="Nij-kR-HNY"/>
+                        <segue destination="J8F-VI-ZjP" kind="presentation" identifier="openNewGameSegue" id="oor-Vb-HFh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kw4-TN-tu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -276,10 +279,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJS-e1-ecO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2836" y="-297"/>
+            <point key="canvasLocation" x="2820" y="79"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Nij-kR-HNY"/>
+        <segue reference="Fue-4M-1Yu"/>
     </inferredMetricsTieBreakers>
 </document>

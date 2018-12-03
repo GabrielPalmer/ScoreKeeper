@@ -24,7 +24,6 @@ class GamesTableViewController: UITableViewController {
         return Game.currentGames.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath)
         
@@ -34,23 +33,18 @@ class GamesTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            Game.currentGames.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            Game.saveGames()
+        }
     }
-    */
-    
     
     @IBAction func addButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "newGameSegue", sender: nil)
     }
-    
+
     //========================================
     // MARK: - Navigation
     //========================================
@@ -59,7 +53,7 @@ class GamesTableViewController: UITableViewController {
     
         switch segue.identifier {
         case "editGameSegue":
-            guard let destination = (segue.destination as? UINavigationController)?.viewControllers.first as? PlayersTableViewController else {fatalError("Unexpected Segue Destination")}
+            guard let destination = segue.destination as? PlayersTableViewController else {fatalError("Unexpected Segue Destination")}
             
             if let selectedRow = tableView.indexPathForSelectedRow?.row {
                 destination.game = Game.currentGames[selectedRow]

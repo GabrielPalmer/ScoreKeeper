@@ -16,14 +16,7 @@ class AddPlayerTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layer.borderWidth = 2
-//        self.layer.borderColor = UIColor.black.cgColor
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        nameTextField.delegate = self
     }
     
     //========================================
